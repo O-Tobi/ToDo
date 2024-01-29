@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<title>Javascript + DOM</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-   <h1>ToDo List</h1>
+	<h1 class="coolTitle">Shopping List</h1>
+	<p id="first">Get it done today</p>
+	<input id="userinput" type="text" placeholder="enter items">
+	<button id="enter">Enter</button>
+	<ul id="listContainer">
+		<div class="wrapper">
+			<li class="list-item">Notebook</li>
+			<button class="del-btn">Delete</button>
+		</div>
 
-   <input type="text" name="todoInput" id="todoInput" placeholder="Enter a task.."/>
-   <button id="enter" type="submit">Enter</button> 
-
-   <ul>
-    <li>Game</li>
-    <li>Laundry</li>
-   </ul>
-
-    <script src="script.js"></script>
+		<div class="wrapper">
+			<li class="list-item">Laptop</li>
+			<button class="del-btn">Delete</button>
+		</div>
+		
+	</ul>
+	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
