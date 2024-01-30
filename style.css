@@ -18,10 +18,11 @@
     -30px 20px 40px dimgrey;
 }
 
-.done {
-  text-decoration: line-through;
+.del-btn {
+  background-color: chocolate;
 }
 
-.del-btn {
-  background-color: rebeccapurple;
+.done {
+  text-decoration: line-through;
+  color: red;
 }

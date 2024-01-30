@@ -1,107 +1,70 @@
-var button = document.getElementById("enter");
-var input = document.getElementById("userinput");
-var ul = document.querySelector("ul");
-var li = document.querySelector("li");
+var input = document.getElementById('userInput');
+var submit = document.getElementById('submit');
+var ul = document.getElementById('list-item');
+var li = document.getElementsByTagName('li'); 
 
-function inputLength() {
-	return input.value.length;
-}
+function lengthCheck() {
+    return input.value.length;
+};
+    
 
+function createListElements() {
+    var div = document.createElement('div');
+    var li = document.createElement('li');
+    var btn = document.createElement('button');
+    btn.classList.add('del-btn');
+    btn.textContent = 'Delete';
+    div.classList.add('wrapper');
+    li.classList.add('bold');
+    ul.appendChild(div);
+    div.append(li, btn);
+    li.appendChild(document.createTextNode(input.value))
+    input.value = '';
+    };
 
-function addListAfterClick() {
-	if (inputLength() > 0) {
-		createListElement();
-	}
-}
+function createAfterSubmit(){
+    if(lengthCheck() > 0){
+        createListElements()
+    };
+};
 
-function addListAfterKeypress(event) {
-	if (inputLength() > 0 && event.keyCode === 13) {
-		createListElement();
-	}
-}
-
-button.addEventListener("click", addListAfterClick);
-
-input.addEventListener("keypress", addListAfterKeypress);
-
-li.addEventListener("click", function(){
-	var activity = document.getElementById('undone');
-
-	if (activity.classList.contains('bold')) {
-		activity.classList.remove('bold');
-		activity.classList.add('done');
-	} else {
-		activity.classList.remove('done');
-		activity.classList.add('bold');
-	}
-})
-var button = document.getElementById("enter");
-var input = document.getElementById("userinput");
-var ul = document.querySelector("ul");
-var btn = document.querySelector("button");
+function createAfterEnter(event){
+    if(lengthCheck() > 0 && event.key=== 'Enter'){
+        createListElements()
+    };
+};
 
 
-function inputLength() {
-	return input.value.length;
-}
+//creating a task with the enter  button on the screen
+submit.addEventListener('click', createAfterSubmit);
 
+//creating a task with the  enter button on the keyboard
+input.addEventListener('keypress', createAfterEnter);
 
-
-function createListElement() {
-	var div = document.createElement("div");
-	var li = document.createElement("li");
-	var btn = document.createElement("button");
-	btn.textContent = "Delete";
-	div.classList.add("wrapper");
-	ul.appendChild(div);
-	div.append(li, btn);
-	li.appendChild(document.createTextNode(input.value));
-	input.value = "";
-	btn.classList.add("del-btn");
-}
-
-function addListAfterClick() {
-	if (inputLength() > 0) {
-		createListElement();
-	}
-}
-
-function addListAfterKeypress(event) {
-	if (inputLength() > 0 && event.keyCode === 13) {
-		createListElement();
-	}
-}
-
-button.addEventListener("click", addListAfterClick);
-
-input.addEventListener("keypress", addListAfterKeypress);
-
-var listContainer = document.getElementById('listContainer');
-listContainer.addEventListener("click", function(event) {
-    if (event.target.tagName === 'LI') {
-        if (event.target.classList.contains('list-item')) {
-            event.target.classList.remove('list-item');
-            event.target.classList.add('done');
-        } else {
-            event.target.classList.remove('done');
-            event.target.classList.add('list-item');
-        }
-    }
+//New improved way to mark a task as completed
+ul.addEventListener('click', function(event){
+    event.target.classList.toggle('done')
 });
 
-document.addEventListener('click', function(event) {
+
+//Old way to mark a task as completed
+/* ul.addEventListener('click', function(event){
+    if(event.target.classList.contains('bold')){
+        event.target.classList.remove('bold');
+        event.target.classList.add('done');
+    } else {
+        event.target.classList.remove('done');
+        event.target.classList.add('bold');
+    };
+}); */
+
+
+//Deleting a task
+document.addEventListener('click', function(event){
     if (event.target.classList.contains('del-btn')) {
-        var confirmDelete = confirm("Are you sure you want to delete this task?");
-        
+        var confirmDelete = confirm('Are you sure you want to delete this?')
         if (confirmDelete) {
-            var parentDiv = event.target.closest('div');
-            
-            if (parentDiv) {
-                parentDiv.remove();
-            }
+            event.target.parentElement.remove()
         }
     }
 });
-
-
-
